@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pyspark-spy"
+version = "1.0"
+description = ""
+authors = ["Alexander Gorokhov <sashgorokhov@gmail.com>"]
+license = "Free for all"
+packages = [
+    { include = "pyspark_spy" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.5"
+pyspark = "^2.0.0"
+
+[tool.poetry.dev-dependencies]
+tox = "*"
+pytest = "*"
+jupyter = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry>=1.1.4"]
+build-backend = "poetry.core.masonry.api"
