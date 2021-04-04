@@ -1,6 +1,11 @@
 language: python
 cache: pip
 
+env:
+  global:
+    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    - PATH="$JAVA_HOME/bin:$PATH"
+
 python:
   - "3.5"
   - "3.6"
@@ -8,7 +13,7 @@ python:
 
 install:
   - pip install -U tox pip virtualenv tox-travis
+  - java -version
 
 script:
-  - jdk_switcher use openjdk8
   - tox
