@@ -10,6 +10,7 @@ from pyspark_spy.classes import JobEndEvent, StageCompletedEvent, OutputMetrics,
 logger = logging.getLogger(__name__)
 
 
+# noinspection PyPep8Naming,PyPep8Naming
 class PersistingSparkListener(SparkListener):
     def __init__(self):
         self.java_events = collections.defaultdict(list)
@@ -28,16 +29,84 @@ class PersistingSparkListener(SparkListener):
         elif event_name == 'stageCompleted':
             return StageCompletedEvent.from_java(java_event)
 
+    @property
+    def applicationEnd(self) -> List:
+        return self.python_events['applicationEnd']
+
+    @property
+    def applicationStart(self) -> List:
+        return self.python_events['applicationStart']
+
+    @property
+    def blockManagerRemoved(self) -> List:
+        return self.python_events['blockManagerRemoved']
+
+    @property
+    def blockUpdated(self) -> List:
+        return self.python_events['blockUpdated']
+
+    @property
+    def environmentUpdate(self) -> List:
+        return self.python_events['environmentUpdate']
+
+    @property
+    def executorAdded(self) -> List:
+        return self.python_events['executorAdded']
+
+    @property
+    def executorMetricsUpdate(self) -> List:
+        return self.python_events['executorMetricsUpdate']
+
+    @property
+    def executorRemoved(self) -> List:
+        return self.python_events['executorRemoved']
+
+    @property
+    def jobEnd(self) -> List[JobEndEvent]:
+        return self.python_events['jobEnd']
+
+    @property
+    def jobStart(self) -> List:
+        return self.python_events['jobStart']
+
+    @property
+    def otherEvent(self) -> List:
+        return self.python_events['otherEvent']
+
+    @property
+    def stageCompleted(self) -> List[StageCompletedEvent]:
+        return self.stageCompleted
+
+    @property
+    def stageSubmitted(self) -> List:
+        return self.python_events['stageSubmitted']
+
+    @property
+    def taskEnd(self) -> List:
+        return self.python_events['taskEnd']
+
+    @property
+    def taskGettingResult(self) -> List:
+        return self.python_events['taskGettingResult']
+
+    @property
+    def taskStart(self) -> List:
+        return self.python_events['taskStart']
+
+    @property
+    def unpersistRDD(self) -> List:
+        return self.python_events['unpersistRDD']
+
     def stage_output_metrics_aggregate(self) -> OutputMetrics:
         # noinspection PyArgumentList
         return OutputMetrics(
             bytesWritten=sum(
                 e.stageInfo.taskMetrics.outputMetrics.bytesWritten
-                for e in self.python_events['stageCompleted']
+                for e in self.stageCompleted
             ),
             recordsWritten=sum(
                 e.stageInfo.taskMetrics.outputMetrics.recordsWritten
-                for e in self.python_events['stageCompleted']
+                for e in self.stageCompleted
             ),
         )
 
@@ -46,11 +115,11 @@ class PersistingSparkListener(SparkListener):
         return InputMetrics(
             bytesRead=sum(
                 e.stageInfo.taskMetrics.inputMetrics.bytesRead
-                for e in self.python_events['stageCompleted']
+                for e in self.stageCompleted
             ),
             recordsRead=sum(
                 e.stageInfo.taskMetrics.inputMetrics.recordsRead
-                for e in self.python_events['stageCompleted']
+                for e in self.stageCompleted
             ),
         )
 
