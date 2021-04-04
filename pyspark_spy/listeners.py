@@ -75,7 +75,7 @@ class PersistingSparkListener(SparkListener):
 
     @property
     def stageCompleted(self) -> List[StageCompletedEvent]:
-        return self.stageCompleted
+        return self.python_events['stageCompleted']
 
     @property
     def stageSubmitted(self) -> List:
