@@ -30,72 +30,12 @@ class PersistingSparkListener(SparkListener):
             return StageCompletedEvent.from_java(java_event)
 
     @property
-    def applicationEnd(self) -> List:
-        return self.python_events['applicationEnd']
-
-    @property
-    def applicationStart(self) -> List:
-        return self.python_events['applicationStart']
-
-    @property
-    def blockManagerRemoved(self) -> List:
-        return self.python_events['blockManagerRemoved']
-
-    @property
-    def blockUpdated(self) -> List:
-        return self.python_events['blockUpdated']
-
-    @property
-    def environmentUpdate(self) -> List:
-        return self.python_events['environmentUpdate']
-
-    @property
-    def executorAdded(self) -> List:
-        return self.python_events['executorAdded']
-
-    @property
-    def executorMetricsUpdate(self) -> List:
-        return self.python_events['executorMetricsUpdate']
-
-    @property
-    def executorRemoved(self) -> List:
-        return self.python_events['executorRemoved']
-
-    @property
     def jobEnd(self) -> List[JobEndEvent]:
         return self.python_events['jobEnd']
 
     @property
-    def jobStart(self) -> List:
-        return self.python_events['jobStart']
-
-    @property
-    def otherEvent(self) -> List:
-        return self.python_events['otherEvent']
-
-    @property
     def stageCompleted(self) -> List[StageCompletedEvent]:
         return self.python_events['stageCompleted']
-
-    @property
-    def stageSubmitted(self) -> List:
-        return self.python_events['stageSubmitted']
-
-    @property
-    def taskEnd(self) -> List:
-        return self.python_events['taskEnd']
-
-    @property
-    def taskGettingResult(self) -> List:
-        return self.python_events['taskGettingResult']
-
-    @property
-    def taskStart(self) -> List:
-        return self.python_events['taskStart']
-
-    @property
-    def unpersistRDD(self) -> List:
-        return self.python_events['unpersistRDD']
 
     def stage_output_metrics_aggregate(self) -> OutputMetrics:
         # noinspection PyArgumentList
@@ -127,10 +67,10 @@ class PersistingSparkListener(SparkListener):
 class ContextSparkListener(PersistingSparkListener):
     def __init__(self):
         super(ContextSparkListener, self).__init__()
-        self.listeners = []  # type: List[PersistingSparkListener]
+        self.listeners = []  # type: List[SparkListener]
 
     def __enter__(self):
-        listener = PersistingSparkListener()
+        listener = self.__class__()
         self.listeners.append(listener)
         return listener
 
