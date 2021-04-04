@@ -3,6 +3,7 @@ pyspark-spy
 
 ![pyspark version](https://img.shields.io/badge/pyspark-2.3%2C%202.4%2C%203.0-success)
 ![python version](https://img.shields.io/badge/python-3.5%2C%203.6%2C%203.7-informational)
+[![Build Status](https://travis-ci.org/sashgorokhov/pyspark-spy.svg?branch=master)](https://travis-ci.org/sashgorokhov/pyspark-spy)
 
 Collect and aggregate on spark events for profitz. In 🐍 way!
 
