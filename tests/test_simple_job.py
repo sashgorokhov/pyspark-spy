@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 import pyspark_spy
@@ -6,6 +8,7 @@ import pyspark_spy
 @pytest.fixture(scope='module', autouse=True)
 def spark_job(sc, listener):
     sc.range(1, 100).count()
+    time.sleep(1)
 
 
 def test_job_recorded(listener):

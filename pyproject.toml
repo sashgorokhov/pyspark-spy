@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "pyspark-spy"
 version = "1.0"
-description = ""
+description = "Collect and aggregate on spark events for profitz. In 🐍 way!"
 authors = ["Alexander Gorokhov <sashgorokhov@gmail.com>"]
-license = "Free for all"
+license = "MIT"
 packages = [
     { include = "pyspark_spy" },
 ]
