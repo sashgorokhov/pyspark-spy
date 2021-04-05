@@ -12,7 +12,7 @@ python:
   - "3.7"
 
 install:
-  - pip install -U tox pip<21.0 virtualenv tox-travis
+  - pip install -U tox "pip<21.0" virtualenv tox-travis
   - java -version
 
 script:
