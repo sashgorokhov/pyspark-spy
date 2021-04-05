@@ -7,6 +7,12 @@ pyspark-spy
 
 Collect and aggregate on spark events for profitz. In 🐍 way!
 
+## Installation
+
+```shell
+pip install pyspark-spy
+```
+
 ## How to
 You register a listener
 ```python
