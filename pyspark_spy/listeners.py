@@ -5,7 +5,7 @@ from typing import List
 from pyspark import SparkContext
 
 from pyspark_spy.interface import SparkListener
-from pyspark_spy.classes import JobEndEvent, StageCompletedEvent, OutputMetrics, InputMetrics
+from pyspark_spy.classes import JobEndEvent, StageCompletedEvent, OutputMetrics, InputMetrics, TaskEndEvent
 
 logger = logging.getLogger(__name__)
 
@@ -26,6 +26,8 @@ class PersistingSparkListener(SparkListener):
     def from_java_event(self, event_name, java_event):
         if event_name == 'jobEnd':
             return JobEndEvent.from_java(java_event)
+        if event_name == 'taskEnd':
+            return TaskEndEvent.from_java(java_event)
         elif event_name == 'stageCompleted':
             return StageCompletedEvent.from_java(java_event)
 
@@ -108,3 +110,4 @@ def register_listener(sc: SparkContext, *listeners: SparkListener):
 
     for listener in listeners:
         sc._jsc.sc().addSparkListener(listener)
+
