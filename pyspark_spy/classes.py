@@ -37,6 +37,18 @@ class JobEndEvent(JavaClass, NamedTuple('JobEndEvent', [
             jobResult=jobj.jobResult().toString()
         )
 
+class TaskEndEvent(JavaClass, NamedTuple('TaskEndEvent', [
+    ('reason', str)
+])):
+    @classmethod
+    def try_convert(cls, jobj):
+        """
+        :rtype:  JobEndEvent
+        """
+        return cls(
+            reason=jobj.reason().toString(),
+        )
+
 
 class OutputMetrics(JavaClass, NamedTuple('OutputMetrics', [
     ('bytesWritten', int),

@@ -3,58 +3,78 @@ class SparkListenerInterface(object):
     """
     SparkListener python interface.
 
-    https://spark.apache.org/docs/2.3.1/api/java/org/apache/spark/scheduler/SparkListener.html
+    https://spark.apache.org/docs/3.2.1/api/java/org/apache/spark/scheduler/SparkListener.html
     """
 
     def onApplicationEnd(self, applicationEnd):
         pass
-
     def onApplicationStart(self, applicationStart):
         pass
-
+    def onBlockManagerAdded(self, blockManagerAdded):
+        pass
     def onBlockManagerRemoved(self, blockManagerRemoved):
         pass
-
     def onBlockUpdated(self, blockUpdated):
         pass
-
     def onEnvironmentUpdate(self, environmentUpdate):
         pass
-
     def onExecutorAdded(self, executorAdded):
         pass
-
+    def onExecutorBlacklisted(self, executorBlacklisted):
+        pass
+    def onExecutorBlacklistedForStage(self, executorBlacklistedForStage):
+        pass
+    def onExecutorExcluded(self, executorExcluded):
+        pass
+    def onExecutorExcludedForStage(self, executorExcludedForStage):
+        pass
     def onExecutorMetricsUpdate(self, executorMetricsUpdate):
         pass
-
     def onExecutorRemoved(self, executorRemoved):
         pass
-
+    def onExecutorUnblacklisted(self, executorUnblacklisted):
+        pass
+    def onExecutorUnexcluded(self, executorUnexcluded):
+        pass
     def onJobEnd(self, jobEnd):
         pass
-
     def onJobStart(self, jobStart):
         pass
-
+    def onNodeBlacklisted(self, nodeBlacklisted):
+        pass
+    def onNodeBlacklistedForStage(self, nodeBlacklistedForStage):
+        pass
+    def onNodeExcluded(self, nodeExcluded):
+        pass
+    def onNodeExcludedForStage(self, nodeExcludedForStage):
+        pass
+    def onNodeUnblacklisted(self, nodeUnblacklisted):
+        pass
+    def onNodeUnexcluded(self, nodeUnexcluded):
+        pass
     def onOtherEvent(self, event):
         pass
-
+    def onResourceProfileAdded(self, resourceProfileAdded):
+        pass
+    def onSpeculativeTaskSubmitted(self, speculativeTaskSubmitted):
+        pass
     def onStageCompleted(self, stageCompleted):
         pass
-
+    def onStageExecutorMetrics(self, stageExecutorMetrics):
+        pass
     def onStageSubmitted(self, stageSubmitted):
         pass
-
     def onTaskEnd(self, taskEnd):
         pass
-
     def onTaskGettingResult(self, taskGettingResult):
         pass
-
     def onTaskStart(self, taskStart):
         pass
-
     def onUnpersistRDD(self, unpersistRDD):
+        pass
+    def onUnschedulableTaskSetAdded(self, unschedulableTaskSetAdded):
+        pass
+    def onUnschedulableTaskSetRemoved(self, unschedulableTaskSetRemoved):
         pass
 
     class Java:
