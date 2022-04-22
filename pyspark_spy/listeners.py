@@ -3,6 +3,7 @@ import logging
 from typing import List
 
 from pyspark import SparkContext
+from pyspark.java_gateway import ensure_callback_server_started
 
 from pyspark_spy.interface import SparkListener
 from pyspark_spy.classes import JobEndEvent, StageCompletedEvent, OutputMetrics, InputMetrics, TaskEndEvent
@@ -38,6 +39,10 @@ class PersistingSparkListener(SparkListener):
     @property
     def stageCompleted(self) -> List[StageCompletedEvent]:
         return self.python_events['stageCompleted']
+
+    @property
+    def taskEnd(self) -> List[TaskEndEvent]:
+        return self.python_events['taskEnd']
 
     def stage_output_metrics_aggregate(self) -> OutputMetrics:
         # noinspection PyArgumentList
@@ -104,10 +109,7 @@ class StdoutSparkListener(LoggingSparkListener):
 
 
 def register_listener(sc: SparkContext, *listeners: SparkListener):
-    callback_server_started = sc._gateway.start_callback_server()
-    if callback_server_started:
-        logger.debug('Callback server started')
+    ensure_callback_server_started(gw = sc._gateway)
 
     for listener in listeners:
         sc._jsc.sc().addSparkListener(listener)
-
